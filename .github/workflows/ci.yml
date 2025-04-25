@@ -22,4 +22,4 @@ jobs:
       - name: Pull selenoid image
         run: docker pull selenoid/chrome:128.0
       - name: Build docker images
-        run: docker compose run test_docker
+        run: docker compose up --build --exit-code-from test_docker
