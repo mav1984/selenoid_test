@@ -24,3 +24,5 @@ jobs:
       # Выполняем команду tree в текущей директории
       - name: Print project tree
         run: tree .
+      - name: Build docker images
+        run: docker compose up --build --exit-code-from test_docker
