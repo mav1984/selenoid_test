@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
 
   selenoid:
@@ -30,7 +28,7 @@ services:
     command: ["--selenoid-uri", "http://selenoid:4444"]
 
   test_docker:
-    image: "test_docker"
+    build: .
     container_name: test_docker
     volumes:
       - ".:/app"
