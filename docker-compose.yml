@@ -8,30 +8,13 @@ services:
     networks:
       - selenoid
     volumes:
-      - "./etc/selenoid:/etc/selenoid"
+      - "./config.json:/etc/selenoid/config.json"
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./etc/selenoid/video:/opt/selenoid/video"
-      - "./etc/selenoid/logs:/opt/selenoid/logs"
-    environment:
-      - OVERRIDE_VIDEO_OUTPUT_DIR=./etc/selenoid/video
-    command: ["-conf", "/etc/selenoid/browsers.json", "-container-network", "selenoid"]
-
-  selenoid-ui:
-    image: "aerokube/selenoid-ui:latest"
-    container_name: selenoid-ui
-    links:
-      - selenoid
-    ports:
-      - "8081:8080"
-    networks:
-      - selenoid
-    command: ["--selenoid-uri", "http://selenoid:4444"]
+    command: ["-conf", "/etc/selenoid/config.json", "-container-network", "selenoid"]
 
   test_docker:
     build: .
     container_name: test_docker
-    volumes:
-      - ".:/app"
     depends_on:
       - selenoid
     networks:
